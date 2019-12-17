@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const orders = [];
     
-    
     client.addEventListener('click', () => {
         choiceBlock.style.display = 'none';
         clientBlock.style.display = 'block';
@@ -32,14 +31,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     formCustomer.addEventListener('submit', (event) => {
         event.preventDefault();
+        const elements = [...formCustomer.elements];
         const elementsObj = {};
-        for (const elem of formCustomer.elements) {
-            if ((elem.tagName === 'INPUT' || 'TEXTAREA')     && elem.type !== "radio" ||
-            elem.type === "radio" && elem.checked) {
-                elementsObj[elem.name] = elem.value;
-            }
-        }
+        elements.filter((elem) => {
+                if ((elem.tagName === 'INPUT' || 'TEXTAREA') && 
+                    elem.type !== "radio" ||
+                    elem.type === "radio" && elem.checked) {
+                    return (elementsObj[elem.name] = elem.value);
+                }
+        });
         orders.push(elementsObj);
+        console.log('orders: ', orders);
+        formCustomer.reset();
     });
-
+    
 });
