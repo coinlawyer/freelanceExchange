@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const choiceBlock = document.querySelector('#block-choice');
     const btnExit = document.querySelector('#btn-exit');
     
+    
     client.addEventListener('click', () => {
         choiceBlock.style.display = 'none';
         clientBlock.style.display = 'block';
