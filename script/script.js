@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         orders.forEach((order, i) => {
 
             ordersTable.innerHTML += `
-                <tr class="order">
+                <tr class="order" data-number-order="${i}">
                     <td>${i+1}</td>
                     <td>${order.title}</td>
                     <td class="${order.currency}"></td>
@@ -25,6 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 </tr>`;
         });
     } 
+
+    ordersTable.addEventListener('click', (event)=> {
+        const target = event.target;
+        console.log(target);
+        const targetOrder = target.closest('.order');
+        console.log(orders[targetOrder.dataset.numberOrder]);
+    });
 
     client.addEventListener('click', () => {
         choiceBlock.style.display = 'none';
