@@ -1,14 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
     'use strict';
    
-    const client = document.getElementById('customer');
-    const freelancer = document.getElementById('freelancer');
-    const clientBlock = document.querySelector('#block-customer');
-    const freelancerBlock = document.querySelector('#block-freelancer');
-    const choiceBlock = document.querySelector('#block-choice');
-    const btnExit = document.querySelector('#btn-exit');
-    const formCustomer = document.querySelector('#form-customer');
-    const ordersTable = document.querySelector('#orders');
+    const client = document.getElementById('customer'),
+         freelancer = document.getElementById('freelancer'),
+         clientBlock = document.querySelector('#block-customer'),
+         freelancerBlock = document.querySelector('#block-freelancer'),
+         choiceBlock = document.querySelector('#block-choice'),
+         btnExit = document.querySelector('#btn-exit'),
+         formCustomer = document.querySelector('#form-customer'),
+         ordersTable = document.querySelector('#orders'),
+         modalOrder = document.querySelector('#order_read'),
+         modalOrderActive = document.querySelector('#order_active');
+
 
     const orders = [];
     
@@ -25,12 +28,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 </tr>`;
         });
     } 
+    
+    const openModal = (numberOrder) => {
+        const order = orders[numberOrder];
+        const modal = order.active ? modalOrderActive : modalOrder; 
+
+        const modalHeader = document.querySelector('.modal-title '),
+                modalEmail = document.querySelector('.email'),
+                modalDescription = document.querySelector('.description'), 
+                modalDeadline = document.querySelector('.deadline'), 
+                modalCurrency = document.querySelector('.currency_img'), 
+                modalPayment = document.querySelector('.count'),
+                modalFirstName = document.querySelector('.firstName'), 
+                modalPhone = document.querySelector('.phone');
+
+                
+
+        modal.style.display = 'block';
+    }
 
     ordersTable.addEventListener('click', (event)=> {
         const target = event.target;
-        console.log(target);
         const targetOrder = target.closest('.order');
-        console.log(orders[targetOrder.dataset.numberOrder]);
+        if (targetOrder) {
+            openModal(targetOrder.dataset.numberOrder);
+        }
     });
 
     client.addEventListener('click', () => {
@@ -38,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clientBlock.style.display = 'block';
         btnExit.style.display = 'block';
     });
+
     freelancer.addEventListener('click', () => {
         choiceBlock.style.display = 'none';
         renderOrders();
@@ -60,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if ((elem.tagName === 'INPUT' || 'TEXTAREA') && 
                     elem.type !== "radio" ||
                     elem.type === "radio" && elem.checked) {
-                    return (elementsObj[elem.name] = elem.value);
+                    (elementsObj[elem.name] = elem.value); 
                 }
         });
         orders.push(elementsObj);
