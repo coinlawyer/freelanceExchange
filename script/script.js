@@ -8,9 +8,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const choiceBlock = document.querySelector('#block-choice');
     const btnExit = document.querySelector('#btn-exit');
     const formCustomer = document.querySelector('#form-customer');
+    const ordersTable = document.querySelector('#orders');
 
     const orders = [];
     
+    const renderOrders = () => {
+        orders.forEach((order, i) => {
+
+            ordersTable.innerHTML += `
+                <tr class="order">
+                    <td>${i+1}</td>
+                    <td>${order.title}</td>
+                    <td class="${order.currency}"></td>
+                    <td>${order.deadline}</td>
+                </tr>`;
+        });
+    } 
+
     client.addEventListener('click', () => {
         choiceBlock.style.display = 'none';
         clientBlock.style.display = 'block';
@@ -18,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     freelancer.addEventListener('click', () => {
         choiceBlock.style.display = 'none';
+        renderOrders();
         freelancerBlock.style.display = 'block';
         btnExit.style.display = 'block';
     });
@@ -41,8 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
         });
         orders.push(elementsObj);
-        console.log('orders: ', orders);
         formCustomer.reset();
     });
     
+
 });
