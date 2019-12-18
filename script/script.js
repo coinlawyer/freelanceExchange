@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const orders = [];
     
     const renderOrders = () => {
+        ordersTable.textContent = '';
         orders.forEach((order, i) => {
 
             ordersTable.innerHTML += `
