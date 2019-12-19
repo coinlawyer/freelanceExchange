@@ -10,8 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
          formCustomer = document.querySelector('#form-customer'),
          ordersTable = document.querySelector('#orders'),
          modalOrder = document.querySelector('#order_read'),
-         modalOrderActive = document.querySelector('#order_active');
+         modalOrderActive = document.querySelector('#order_active'),
+         bodyHtml = document.querySelector('body'),
+         closeButton = document.querySelector('.close');
 
+    console.log(closeButton);
 
     const orders = [];
     
@@ -53,6 +56,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         modal.style.display = 'block';
     }
+
+    const closeModal = () => {
+        // const modal = document.querySelector('.modal-dialog');
+        modalOrder.style.display = 'none';
+    }
+
+    bodyHtml.addEventListener('click', (event) => {
+        console.log(event.target);
+    }); 
+    
+    closeButton.addEventListener('click', closeModal);
 
     ordersTable.addEventListener('click', (event)=> {
         const target = event.target;
