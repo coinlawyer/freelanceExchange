@@ -42,7 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 modalFirstName = document.querySelector('.firstName'), 
                 modalPhone = document.querySelector('.phone');
 
-                
+                modalHeader.textContent = order.title;
+                modalFirstName.textContent = order.firstName;
+                modalDescription.textContent = order.description;
+                modalEmail.textContent = order.email;
+                modalDeadline.textContent = order.deadline;
+                modalCurrency.classList.add(`${order.currency}`);
+                modalPayment.textContent = order.count;
+                modalPhone.setAttribute("href", `${order.phone}`);
 
         modal.style.display = 'block';
     }
