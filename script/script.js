@@ -14,8 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
          bodyHtml = document.querySelector('body'),
          closeButton = document.querySelector('.close');
 
-    console.log(closeButton);
-
     const orders = [];
     
     const renderOrders = () => {
@@ -58,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const closeModal = () => {
-        // const modal = document.querySelector('.modal-dialog');
         modalOrder.style.display = 'none';
     }
 
