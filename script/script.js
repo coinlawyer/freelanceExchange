@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
          ordersTable = document.querySelector('#orders'),
          modalOrder = document.querySelector('#order_read'),
          modalOrderActive = document.querySelector('#order_active'),
-         bodyHtml = document.querySelector('body'),
-         closeButton = document.querySelector('.close');
+         bodyHtml = document.querySelector('body');
+        //  closeButton = document.querySelector('.close');
 
     const orders = [];
     
@@ -37,40 +37,48 @@ document.addEventListener('DOMContentLoaded', () => {
         const modal = active ? modalOrderActive : modalOrder; 
 
         const modalHeader = modal.querySelector('.modal-title '),
-                modalEmail = modal.querySelector('.email'),
-                modalDescription = modal.querySelector('.description'), 
-                modalDeadline = modal.querySelector('.deadline'), 
-                modalCurrency = modal.querySelector('.currency_img'), 
+        modalEmail = modal.querySelector('.email'),
+        modalDescription = modal.querySelector('.description'), 
+        modalDeadline = modal.querySelector('.deadline'), 
+        modalCurrency = modal.querySelector('.currency_img'), 
                 modalPayment = modal.querySelector('.count'),
                 modalFirstName = modal.querySelector('.firstName'), 
                 modalPhone = modal.querySelector('.phone');
 
                 modalHeader.textContent = title;
                 modalFirstName.textContent = firstName;
-                modalDescription.textContent = description;
-                modalEmail.textContent = email;
-                modalEmail.href = 'mailto:' + email;
-                modalDeadline.textContent = deadline;
-                modalCurrency.className = 'currency_img ';
-                modalCurrency.classList.add(`${currency}`);
-                modalPayment.textContent = amount;
+        modalDescription.textContent = description;
+        modalEmail.textContent = email;
+        modalEmail.href = 'mailto:' + email;
+        modalDeadline.textContent = deadline;
+        modalCurrency.className = 'currency_img ';
+        modalCurrency.classList.add(`${currency}`);
+        modalPayment.textContent = amount;
 
-                // modalPhone ? modalPhone.href = 'tel:' + phone : '';
-                modalPhone && (modalPhone.href = 'tel:' + phone); // the same as line above
+        modal.id = numberOrder;
+        
+        // modalPhone ? modalPhone.href = 'tel:' + phone : '';
+        modalPhone && (modalPhone.href = 'tel:' + phone); // the same as line above
 
         modal.style.display = 'flex'; 
+        
+        modal.addEventListener('click', closeModal)
     }
 
-    const closeModal = () => {      
+    const closeModal = (event) => {    
+        const target = event.target;
+        
+        const modal = target.closest('.order-modal');
+        console.log(modal, modal.id);
         modalOrder.style.display = 'none';
     }
-
+    
 
     bodyHtml.addEventListener('click', (event) => {
         console.log(event.target);
     }); 
     
-    closeButton.addEventListener('click', closeModal);
+    // closeButton.addEventListener('click', closeModal);
 
     ordersTable.addEventListener('click', (event)=> {
         const target = event.target;
