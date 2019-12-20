@@ -32,32 +32,39 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const openModal = (numberOrder) => {
         const order = orders[numberOrder];
-        const modal = order.active ? modalOrderActive : modalOrder; 
+        const { title, firstName, description, email, deadline, currency, amount, phone, active = false} = order;
 
-        const modalHeader = document.querySelector('.modal-title '),
-                modalEmail = document.querySelector('.email'),
-                modalDescription = document.querySelector('.description'), 
-                modalDeadline = document.querySelector('.deadline'), 
-                modalCurrency = document.querySelector('.currency_img'), 
-                modalPayment = document.querySelector('.count'),
-                modalFirstName = document.querySelector('.firstName'), 
-                modalPhone = document.querySelector('.phone');
+        const modal = active ? modalOrderActive : modalOrder; 
 
-                modalHeader.textContent = order.title;
-                modalFirstName.textContent = order.firstName;
-                modalDescription.textContent = order.description;
-                modalEmail.textContent = order.email;
-                modalDeadline.textContent = order.deadline;
-                modalCurrency.classList.add(`${order.currency}`);
-                modalPayment.textContent = order.count;
-                modalPhone.setAttribute("href", `${order.phone}`);
+        const modalHeader = modal.querySelector('.modal-title '),
+                modalEmail = modal.querySelector('.email'),
+                modalDescription = modal.querySelector('.description'), 
+                modalDeadline = modal.querySelector('.deadline'), 
+                modalCurrency = modal.querySelector('.currency_img'), 
+                modalPayment = modal.querySelector('.count'),
+                modalFirstName = modal.querySelector('.firstName'), 
+                modalPhone = modal.querySelector('.phone');
 
-        modal.style.display = 'block';
+                modalHeader.textContent = title;
+                modalFirstName.textContent = firstName;
+                modalDescription.textContent = description;
+                modalEmail.textContent = email;
+                modalEmail.href = 'mailto:' + email;
+                modalDeadline.textContent = deadline;
+                modalCurrency.className = 'currency_img ';
+                modalCurrency.classList.add(`${currency}`);
+                modalPayment.textContent = amount;
+
+                // modalPhone ? modalPhone.href = 'tel:' + phone : '';
+                modalPhone && (modalPhone.href = 'tel:' + phone); // the same as line above
+
+        modal.style.display = 'flex'; 
     }
 
-    const closeModal = () => {
+    const closeModal = () => {      
         modalOrder.style.display = 'none';
     }
+
 
     bodyHtml.addEventListener('click', (event) => {
         console.log(event.target);
