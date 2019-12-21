@@ -79,8 +79,13 @@ document.addEventListener('DOMContentLoaded', () => {
             modalOrder.style.display = 'none';
             renderOrders();
         }
+
+        if (target.classList.contains ('btn-danger')) {
+            order.active = false;
+            modalOrderActive.style.display = 'none';
+            renderOrders();
+        }
     }
-    
 
     bodyHtml.addEventListener('click', (event) => {
         console.log(event.target);
