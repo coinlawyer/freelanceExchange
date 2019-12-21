@@ -13,7 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
          modalOrderActive = document.querySelector('#order_active'),
          bodyHtml = document.querySelector('body');
 
-    const orders = [];
+    const orders = JSON.parse(localStorage.getItem('freeOrders')) || [];
+    console.log('orders: ', orders);
+
+    const toLocalStorage = () => {
+        localStorage.setItem('freeOrders', JSON.stringify(orders));
+    };
     
     const renderOrders = () => {
         ordersTable.textContent = '';
@@ -57,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.id = numberOrder;
         
         // modalPhone ? modalPhone.href = 'tel:' + phone : '';
-        modalPhone && (modalPhone.href = 'tel:' + phone); // the same as line above
+        modalPhone && (modalPhone.href = 'tel:' + phone) ; // the same as line above
 
         modal.style.display = 'flex'; 
         
@@ -76,18 +81,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (target.classList.contains('get-order')) {
             order.active = true;
             modal.style.display = 'none';
+            toLocalStorage();
             renderOrders();
         }
 
         if (target.classList.contains ('btn-danger')) {
             order.active = false;
             modal.style.display = 'none';
+            toLocalStorage();
             renderOrders();
         }
 
         if (target.id === 'ready') {
             orders.splice(orders.indexOf(order), 1);
             modal.style.display = 'none';
+            toLocalStorage();
             renderOrders();
         }
     };
@@ -126,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     formCustomer.addEventListener('submit', (event) => {
         event.preventDefault();
-        const elements = [...formCustomer.elements];
+        const elements = [...formCustomer.elements];//making array from html collection
         const elementsObj = {};
         elements.filter((elem) => {
                 if ((elem.tagName === 'INPUT' || 'TEXTAREA') && 
@@ -137,6 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         orders.push(elementsObj);
         formCustomer.reset();
+
+        toLocalStorage();
     });
     
 
