@@ -18,9 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderOrders = () => {
         ordersTable.textContent = '';
         orders.forEach((order, i) => {
-
+        console.log(order);
             ordersTable.innerHTML += `
-                <tr class="order" data-number-order="${i}">
+                <tr class="order ${order.active ? 'taken' : ''}" 
+                    data-number-order="${i}">
                     <td>${i+1}</td>
                     <td>${order.title}</td>
                     <td class="${order.currency}"></td>
@@ -37,16 +38,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const modal = active ? modalOrderActive : modalOrder; 
 
         const modalHeader = modal.querySelector('.modal-title '),
-        modalEmail = modal.querySelector('.email'),
-        modalDescription = modal.querySelector('.description'), 
-        modalDeadline = modal.querySelector('.deadline'), 
-        modalCurrency = modal.querySelector('.currency_img'), 
-                modalPayment = modal.querySelector('.count'),
-                modalFirstName = modal.querySelector('.firstName'), 
-                modalPhone = modal.querySelector('.phone');
+            modalEmail = modal.querySelector('.email'),
+            modalDescription = modal.querySelector('.description'), 
+            modalDeadline = modal.querySelector('.deadline'), 
+            modalCurrency = modal.querySelector('.currency_img'), 
+            modalPayment = modal.querySelector('.count'),
+            modalFirstName = modal.querySelector('.firstName'), 
+            modalPhone = modal.querySelector('.phone');
 
-                modalHeader.textContent = title;
-                modalFirstName.textContent = firstName;
+        modalHeader.textContent = title;
+        modalFirstName.textContent = firstName;
         modalDescription.textContent = description;
         modalEmail.textContent = email;
         modalEmail.href = 'mailto:' + email;
@@ -75,6 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (target.classList.contains('get-order')) {
             order.active = true;
+            modalOrder.style.display = 'none';
+            renderOrders();
         }
     }
     
@@ -82,8 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
     bodyHtml.addEventListener('click', (event) => {
         console.log(event.target);
     }); 
-    
-    // closeButton.addEventListener('click', closeModal);
 
     ordersTable.addEventListener('click', (event)=> {
         const target = event.target;
