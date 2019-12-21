@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderOrders = () => {
         ordersTable.textContent = '';
         orders.forEach((order, i) => {
-        console.log(order);
             ordersTable.innerHTML += `
                 <tr class="order ${order.active ? 'taken' : ''}" 
                     data-number-order="${i}">
@@ -28,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${order.deadline}</td>
                 </tr>`;
         });
-    } 
+    }; 
     
     const openModal = (numberOrder) => {
         const order = orders[numberOrder];
@@ -62,8 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         modal.style.display = 'flex'; 
         
-        modal.addEventListener('click', closeModal)
-    }
+        modal.addEventListener('click', closeModal);
+    };
 
     const closeModal = (event) => {    
         const target = event.target;
@@ -71,21 +70,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const order = orders[modal.id];
 
         if (target.closest('.close ') || (target === modal) ) { 
-            modalOrder.style.display = 'none';
+            modal.style.display = 'none';
         }
 
         if (target.classList.contains('get-order')) {
             order.active = true;
-            modalOrder.style.display = 'none';
+            modal.style.display = 'none';
             renderOrders();
         }
 
         if (target.classList.contains ('btn-danger')) {
             order.active = false;
-            modalOrderActive.style.display = 'none';
+            modal.style.display = 'none';
             renderOrders();
         }
-    }
+
+        if (target.id === 'ready') {
+            orders.splice(orders.indexOf(order), 1);
+            modal.style.display = 'none';
+            renderOrders();
+        }
+    };
 
     bodyHtml.addEventListener('click', (event) => {
         console.log(event.target);
