@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
          modalOrder = document.querySelector('#order_read'),
          modalOrderActive = document.querySelector('#order_active'),
          bodyHtml = document.querySelector('body');
-        //  closeButton = document.querySelector('.close');
 
     const orders = [];
     
@@ -32,7 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const openModal = (numberOrder) => {
         const order = orders[numberOrder];
-        const { title, firstName, description, email, deadline, currency, amount, phone, active = false} = order;
+        const { title, firstName, description, email, deadline, 
+            currency, amount, phone, active = false} = order;
 
         const modal = active ? modalOrderActive : modalOrder; 
 
@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
         modalCurrency.className = 'currency_img ';
         modalCurrency.classList.add(`${currency}`);
         modalPayment.textContent = amount;
-
         modal.id = numberOrder;
         
         // modalPhone ? modalPhone.href = 'tel:' + phone : '';
@@ -67,10 +66,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const closeModal = (event) => {    
         const target = event.target;
-        
         const modal = target.closest('.order-modal');
-        console.log(modal, modal.id);
-        modalOrder.style.display = 'none';
+        const order = orders[modal.id];
+
+        if (target.closest('.close ') || (target === modal) ) { 
+            modalOrder.style.display = 'none';
+        }
+
+        if (target.classList.contains('get-order')) {
+            order.active = true;
+        }
     }
     
 
