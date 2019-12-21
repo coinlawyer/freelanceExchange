@@ -35,13 +35,13 @@
 			<form id="form-customer">
 
 				<div class="mb-3">
-					<label for="title">Header (brief description of the task)</label>
-					<input type="text" class="form-control" id="title" name="title" required>
+					<label for="title">Task name</label>
+					<input type="text" class="form-control" id="title" name="title" placeholder="short task description" required>
 				</div>
 				<div class="row">
 					<div class="col-md-4 mb-3">
 						<label for="firstName">Your name</label>
-						<input type="text" class="form-control" id="firstName" name="firstName" required>
+						<input type="text" class="form-control" id="firstName" name="firstName" placeholder="your name" required>
 					</div>
 					<div class="col-md-4 mb-3">
 						<label for="email">Email</label>
@@ -49,7 +49,7 @@
 					</div>
 					<div class="col-md-4 mb-3">
 						<label for="phone">Tel. # <span class="text-muted">(optional)</span></label>
-						<input type="text" class="form-control" id="phone" name="phone">
+						<input type="text" class="form-control" id="phone" name="phone" placeholder="+380">
 					</div>
 				</div>
 
@@ -58,7 +58,7 @@
 					<label for="description">Description</label>
 					<textarea type="text" class="form-control" id="description" name="description"
 										placeholder="Describe the task in details" rows="4"
-										required>Lorem ipsum dolor sit amet, consectetur.</textarea>
+										required></textarea>
 				</div>
 
 				<div class="row">
@@ -66,7 +66,7 @@
 
 						<div class="mb-3">
 							<label for="amount">Quantity</label>
-							<input type="number" class="form-control" id="amount" name="amount" required>
+							<input type="number" class="form-control" id="amount" name="amount" min="1" required>
 						</div>
 						<div class="d-flex justify-content-center">
 							<label class="currency">
