@@ -74,29 +74,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const modal = target.closest('.order-modal');
         const order = orders[modal.id];
 
+        const basicModalActions = () => {
+            modal.style.display = 'none';
+            toLocalStorage();
+            renderOrders();
+        }
+
         if (target.closest('.close ') || (target === modal) ) { 
             modal.style.display = 'none';
         }
 
         if (target.classList.contains('get-order')) {
             order.active = true;
-            modal.style.display = 'none';
-            toLocalStorage();
-            renderOrders();
+            basicModalActions();
         }
 
         if (target.classList.contains ('btn-danger')) {
             order.active = false;
-            modal.style.display = 'none';
-            toLocalStorage();
-            renderOrders();
+            basicModalActions();
         }
 
         if (target.id === 'ready') {
             orders.splice(orders.indexOf(order), 1);
-            modal.style.display = 'none';
-            toLocalStorage();
-            renderOrders();
+            basicModalActions();
         }
     };
 
