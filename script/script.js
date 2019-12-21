@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
          bodyHtml = document.querySelector('body');
 
     const orders = JSON.parse(localStorage.getItem('freeOrders')) || [];
-    console.log('orders: ', orders);
 
     const toLocalStorage = () => {
         localStorage.setItem('freeOrders', JSON.stringify(orders));
@@ -99,10 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
             basicModalActions();
         }
     };
-
-    bodyHtml.addEventListener('click', (event) => {
-        console.log(event.target);
-    }); 
 
     ordersTable.addEventListener('click', (event)=> {
         const target = event.target;
