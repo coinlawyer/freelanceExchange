@@ -123,6 +123,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     client.addEventListener('click', () => {
         choiceBlock.style.display = 'none';
+        const toDay = new Date().toISOString().slice(0, 10);
+        document.getElementById('deadline')
+            .setAttribute('min', `${toDay}`);//set current date as min value of the date input 
         clientBlock.style.display = 'block';
         btnExit.style.display = 'block';
     });
