@@ -19,6 +19,21 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('freeOrders', JSON.stringify(orders));
     };
     
+    const calсDeadline = (deadline) => {
+        const deadlineDate = new Date(deadline);
+        const currentDate = new Date();
+        const differnceInMs = deadlineDate.getTime() - currentDate.getTime(); 
+        const differnceInHours = Math.floor(differnceInMs / (1000 * 3600 ));
+        const differnceInDays = Math.floor(differnceInMs / (1000 * 3600 * 24));
+        const numDaysLeft = differnceInDays > 1 ? 
+            `${differnceInDays} days` :
+            differnceInDays === 1 ? `${differnceInDays} day` : 
+            differnceInHours > 1 ? `${differnceInHours} hours`: 
+            differnceInHours === 1 ? `${differnceInHours} hour` :
+            `less than 1 hour` > 1 ; 
+        return numDaysLeft;
+    };
+
     const renderOrders = () => {
         ordersTable.textContent = '';
         orders.forEach((order, i) => {
@@ -28,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${i+1}</td>
                     <td>${order.title}</td>
                     <td class="${order.currency}"></td>
-                    <td>${order.deadline}</td>
+                    <td>${calсDeadline(order.deadline)}</td>
                 </tr>`;
         });
     }; 
@@ -54,14 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
         modalDescription.textContent = description;
         modalEmail.textContent = email;
         modalEmail.href = 'mailto:' + email;
-        modalDeadline.textContent = deadline;
+        modalDeadline.textContent = calсDeadline(deadline);
         modalCurrency.className = 'currency_img ';
         modalCurrency.classList.add(`${currency}`);
         modalPayment.textContent = amount;
         modal.id = numberOrder;
         
-        // modalPhone ? modalPhone.href = 'tel:' + phone : '';
-        modalPhone && (modalPhone.href = 'tel:' + phone) ; // the same as line above
+        modalPhone ? modalPhone.href = 'tel:' + phone : '';
 
         modal.style.display = 'flex'; 
         
@@ -77,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.display = 'none';
             toLocalStorage();
             renderOrders();
-        }
+        };
 
         if (target.closest('.close ') || (target === modal) ) { 
             modal.style.display = 'none';
@@ -143,6 +157,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
         toLocalStorage();
     });
-    
 
 });
