@@ -119,3 +119,11 @@ main {
     right: 1rem;
     padding: 0.5rem 3rem;
 }
+
+.row-sort{
+    cursor: pointer;
+} 
+
+tr th.row-sort:hover {
+    background-color: rgba(149, 154, 158, 0.658);
+}
