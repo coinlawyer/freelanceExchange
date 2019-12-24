@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
          ordersTable = document.querySelector('#orders'),
          modalOrder = document.querySelector('#order_read'),
          modalOrderActive = document.querySelector('#order_active'),
-         bodyHtml = document.querySelector('body');
+         bodyHtml = document.querySelector('body'),
+         headTable = document.querySelector('#headTable');
 
     const orders = JSON.parse(localStorage.getItem('freeOrders')) || [];
 
@@ -112,6 +113,14 @@ document.addEventListener('DOMContentLoaded', () => {
             basicModalActions();
         }
     };
+
+    // headTable.addEventListener('click', (event) => {
+    //     const target = event.target;
+    //     if (target.classList.contains('row-sort')) { // or target.className === 'row-sort' if we are sire in full class name
+    //         console.log(target.textContent);
+
+    //     }
+    // });
 
     ordersTable.addEventListener('click', (event)=> {
         const target = event.target;

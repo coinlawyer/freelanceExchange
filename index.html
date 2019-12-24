@@ -12,7 +12,7 @@
 <body>
 
 <!--hello world-->
-<main class="container py-5 text-center">
+<main class="container py-5 text-center"> class="row-sort" id=""
 	<div id="block-choice">
 		<img class="d-block mx-auto mb-4" src="./img/logo.png" alt="" width="72" height="72">
 		<h1>FreelanceGloBe</h1>
@@ -106,12 +106,12 @@
 		<h1>FreelanceGloBe</h1>
 		<div class="table-responsive">
 			<table class="table table-bordered table-hover table-sm">
-				<thead class="thead-dark">
+				<thead class="thead-dark" id="headTable">
 				<tr>
 					<th>#</th>
-					<th>Main task</th>
-					<th>Currency</th>
-					<th>Deadline</th>
+					<th class="row-sort" id="taskSort">Main task</th>
+					<th class="row-sort" id="currencySort">Currency</th>
+					<th class="row-sort" id="deadlineSort">Deadline</th>
 				</tr>
 				</thead>
 				<tbody id="orders">
