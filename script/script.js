@@ -48,6 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 </tr>`;
         });
     }; 
+
+    const orderSort = (arr, prop) => {
+        arr.sort((a, b) => a[prop].toUpperCase() > b[prop].toUpperCase() ? 1 : -1 );
+    };
     
     const openModal = (numberOrder) => {
         const order = orders[numberOrder];
@@ -114,13 +118,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // headTable.addEventListener('click', (event) => {
-    //     const target = event.target;
-    //     if (target.classList.contains('row-sort')) { // or target.className === 'row-sort' if we are sire in full class name
-    //         console.log(target.textContent);
-
-    //     }
-    // });
+    headTable.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target.classList.contains('row-sort')) { // or target.className === 'row-sort' if we are sire in full class name
+            if (target.id === 'taskSort') {
+                orderSort(orders, 'title');                
+            }
+            
+            if (target.id === 'currencySort') {
+                orderSort(orders, 'currency');
+            }
+            
+            if (target.id === 'deadlineSort') {
+                orderSort(orders, 'deadline');    
+            }
+            toLocalStorage();
+            renderOrders();
+            
+        }
+    });
 
     ordersTable.addEventListener('click', (event)=> {
         const target = event.target;
